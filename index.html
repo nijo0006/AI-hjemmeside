@@ -12,31 +12,23 @@
     <h3>Ved du heller aldrig, hvad du skal ønske dig? Bare rolig — det gør næsten ingen. Skriv dit navn, din alder og dine interesser, så finder vi ud af det sammen!</h3>
 </header>
 <main>
-<section>
+<section class="flex-container">
     <form>
         <!-- First name -->  <!-- LAV EN POP UP MED "HEJ xxx!" -->
         <div>
-            <label for="fname">First Name </label>
+            <label for="fname">Dit fornavn: </label>
             <input class= "fname" type="text" id="fname" name="fname" placeholder="Niels" required>
-            <p id="liveGreeting"></p>
 
         </div>
         <br>
 
-        <!-- Last Name -->
-        <div>
-            <label for="lname">Last Name </label>
-            <input class= "lname" type="text" id="lname" name="lname" placeholder="Nielsen" required>
-        </div>
-        <br>
 
         <!-- Year of birth -->
         <div>
-            <label for="bdate">Birthdate:</label>
+            <label for="bdate">Din fødselsdato:</label>
             <input class= "bdate" type="date" id="bdate" name="bdate" required>
         </div>
         <br>
-</section>
 
 <div>
     <label for="budget">Hvor rige er dine forældre?:</label>
@@ -49,33 +41,30 @@
         <option value="1500-2000 kr."> 2000+ kr. 🤑 </option>
     </select>
 </div>
-<section>
     <div>
         <h4> Hvad er dine interesser? </h4>
 
         <label for="runclass">Løb & træning🏃🏼🏋</label>
         <input class ="runclass" type="radio" id="runclass" name="ticketType" value="runclass" >
-
+<br><br>
         <label for="foodclass">Madlavning & bagning🧑🏼‍🍳</label>
         <input class ="foodclass" type="radio" id="foodclass" name="ticketType" value="foodclass" >
-
+<br><br>
         <label for="gamingclass">Gaming🕹️</label>
         <input class="gamingclass" type="radio" id="gamingclass" name="ticketType" value="gamingclass" >
-
+<br><br>
         <label for="musicclass">Musik (lytning eller at spille selv)🎶</label>
         <input class="musicclass" type="radio" id="musicclass" name="ticketType" value="musicclass" >
-
+<br><br>
         <label for="creativeclass">Kreativitet (tegning, maling, DIY)🧑🏽‍🎨</label>
         <input class="creativeclass" type="radio" id="creativeclass" name="ticketType" value="creativeclass" >
-
+<br><br>
         <label for="photoclass">Fotografi📸</label>
         <input class="photoclass" type="radio" id="photoclass" name="ticketType" value="photoclass" >
-
+<br><br>
         <label for="fashionclass">Mode & styling💅🏽</label>
         <input class="fashionclass" type="radio" id="fashionclass" name="ticketType" value="fashionclass" >
     </div>
-</section>
-    <section>
         <br>
         <button class="button" type="button">🎁 Få din ønskeliste 🎁</button>
 

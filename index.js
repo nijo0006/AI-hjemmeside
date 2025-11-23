@@ -2,7 +2,7 @@ async function mistralChat(prompt) {
    const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
         method: "POST",
         headers: {
-            "Authorization": "Bearer jg142LQjxmwWcf1uS9El9LVSK5DVV8Q8",
+            "Authorization": "Bearer Insæt API key",
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -25,7 +25,6 @@ button.addEventListener("click", async function (event) {
     event.preventDefault();
     console.log("hej!")
     const fname = document.querySelector(".fname").value;
-    const lname = document.querySelector(".lname").value;
     const bdate = document.querySelector(".bdate").value;
     const budget = document.querySelector(".budget").value;
 
@@ -42,30 +41,50 @@ button.addEventListener("click", async function (event) {
 
     // Vis “loading”
     const outputDiv = document.querySelector(".resultBox")
-    outputDiv.textContent = "Genererer ønskeliste... 🎁";
+    outputDiv.innerHTML = "Genererer ønskeliste... 🎁";
 
 // Lav en prompt
     const prompt = `
-Lav en ønskeliste baseret på disse oplysninger:
+You are a creative, humorous, slightly roasting gift-expert.
+Your job is to produce highly specific, well-written Danish gift ideas with no spelling mistakes.
 
-Navn: ${fname} ${lname}
-Fødselsdato: ${bdate}
+INPUT:
+Name: ${fname}
+Birthdate: ${bdate}
 Budget: ${budget}
-Interesse: ${interestType}
+Interest: ${interestType}
 
-Lav 5-7 gaveidéer til jul og fødselsdag. 
-Skriv i et hyggeligt og humoristisk sprog.
+TASK:
+Create 5–7 highly specific gift ideas that:
+- Fit the person's interest and budget
+- Are written in Danish
+- Use a cozy, playful tone with gentle teasing (never rude)
+- Are written in second person (“du”)
+- Include 1–2 fitting emojis per item
+- Feel personal and detailed
+- Each idea must include a gentle, playful roast about their habits or personality.
 
-Du må gerne skrive det op i punktform for hvert ønske. 
-ønske 1 overskrift: h3 i html
+FORMAT INSTRUCTIONS:
+Return ONLY HTML with the following structure:
 
-ønske 2 overskrift: h3 i html
+<ul>
+<li>
+<span style="font-weight:bold; font-size:1em;">Gift title</span><br>
+<span style="font-size:0.95em;">Detailed explanation</span>
+</li>
+<br>
+... repeat ...
+</ul>
 
-fortsæt som dette
-
+RULES:
+- No extra commentary outside the HTML.
+- No meta-text.
+- No spelling errors.
+- No apologies or disclaimers.
 `;
 
+
     const result = await mistralChat (prompt);
-    outputDiv.textContent = result;
+    outputDiv.innerHTML = result;
 
 })
