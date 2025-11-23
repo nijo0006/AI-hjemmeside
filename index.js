@@ -1,33 +1,61 @@
+// Funktion der sender en prompt til Mistral API'et
 async function mistralChat(prompt) {
-   const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
-        method: "POST",
+
+    // Kalder Mistral API'et med fetch
+    const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
+        method: "POST",               // Vi sender data til API'et
         headers: {
             "Authorization": "Bearer Insæt API key",
+            // API-nøglen — giver adgang til modellen (fjern før det lægges i repositoriet!)
             "Content-Type": "application/json"
+            // Fortæller serveren at vi sender JSON-data
         },
         body: JSON.stringify({
             model: "ministral-8b-2410",
+            // Hvilken Mistral-model der skal bruges
+
             messages: [
                 {role: "system", content: "You are a concise assistant."},
+                // System-rolle: generelle instruktioner til modellen
+
                 {role: "user", content: prompt}
+                // Selve prompten du bygger senere
             ],
+
             temperature: 0.7,
+            // Hvor kreative svarene må være — højere = mere kreative
+
             max_tokens: 512
+            // Max længde på det genererede svar
         })
     })
+
+    // Konverter API-svaret fra JSON
     const data = await response.json();
+
+    // Returnér selve tekstindholdet modellen skrev
     return data.choices[0].message.content;
 }
 
+
+
+// Finder knappen i HTML
 const button = document.querySelector(".button");
 
+
+// Når der klikkes på knappen, sker dette:
 button.addEventListener("click", async function (event) {
     event.preventDefault();
+    // Stopper siden fra at reloade når knappen trykkes
+
     console.log("hej!")
+
+    // Henter værdierne fra formularfelterne
     const fname = document.querySelector(".fname").value;
     const bdate = document.querySelector(".bdate").value;
     const budget = document.querySelector(".budget").value;
 
+    // Tjekker hvilken interesse der er valgt
     let interestType = "";
     if (document.querySelector(".runclass").checked) interestType = "Løb & træning";
     else if (document.querySelector(".foodclass").checked) interestType = "Madlavning & bagning";
@@ -38,12 +66,12 @@ button.addEventListener("click", async function (event) {
     else if (document.querySelector(".fashionclass").checked) interestType = "Mode & styling";
 
 
-
-    // Vis “loading”
+    // Viser en midlertidig “loading”-tekst
     const outputDiv = document.querySelector(".resultBox")
     outputDiv.innerHTML = "Genererer ønskeliste... 🎁";
 
-// Lav en prompt
+
+    // Bygger den store prompt til AI'en
     const prompt = `
 You are a creative, humorous, slightly roasting gift-expert.
 Your job is to produce highly specific, well-written Danish gift ideas with no spelling mistakes.
@@ -84,7 +112,10 @@ RULES:
 `;
 
 
-    const result = await mistralChat (prompt);
+    // Sender prompten til Mistral API'et og venter på svar
+    const result = await mistralChat(prompt);
+
+    // Viser AI'ens HTML-output i din resultBox
     outputDiv.innerHTML = result;
 
 })
